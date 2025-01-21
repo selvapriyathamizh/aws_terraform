@@ -40,4 +40,5 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
       run: |
         cd  ${{ github.workspace }}
+        terraform force-unlock 0add44b7-68ed-36f8-9190-a33da9f5dc3d
         terraform apply -auto-approve
