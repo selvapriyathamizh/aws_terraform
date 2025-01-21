@@ -2,24 +2,6 @@ name: EC2 stop
 
 on:
   workflow_dispatch:
-    inputs:
-      instancestate:
-        description: "Stop or Start an EC2 instance"
-        required: true
-        default: 'running'
-        type: choice
-        options:
-        - running
-        - stopped
-
-      instancetype:
-        description: "EC2 instance type t2.xlarge"
-        required: true
-        default: 't2.xlarge'
-        type: choice
-        options:
-        - t2.xlarge
-        - t2.micro
         
 jobs:
   terraform:
@@ -40,21 +22,13 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       
-    - name: Terraform Import EC2 Instance
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-        cd  ${{ github.workspace }}
-        terraform import aws_instance.AAP ${{ secrets.INSTANCE_ID }}
-
     - name: Terraform Plan
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         cd  ${{ github.workspace }}
-        terraform plan -var="instance_state=${{ github.event.inputs.instancestate }}"  -var="instance_type=${{ github.event.inputs.instancetype }}"
+        terraform plan
 
 
     - name: Terraform Apply
@@ -63,4 +37,4 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         cd  ${{ github.workspace }}
-        terraform apply  -var="instance_state=${{ github.event.inputs.instancestate }}" -var="instance_type=${{ github.event.inputs.instancetype }}" -auto-approve
+        terraform apply 
