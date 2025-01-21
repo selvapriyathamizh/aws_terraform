@@ -40,4 +40,4 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
       run: |
         cd  ${{ github.workspace }}
-        terraform apply 
+        terraform apply -auto-approve
