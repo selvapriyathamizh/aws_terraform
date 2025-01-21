@@ -3,25 +3,7 @@ name: EC2 stop
 
 on:
   workflow_dispatch:
-    inputs:
-      instancestate:
-        description: "Stop or Start an EC2 instance"
-        required: true
-        default: 'running'
-        type: choice
-        options:
-        - running
-        - stopped
-
-      instancetype:
-        description: "EC2 instance type t2.xlarge"
-        required: true
-        default: 't2.xlarge'
-        type: choice
-        options:
-        - t2.xlarge
-        - t2.micro
-        
+  
 jobs:
   terraform:
     runs-on: ubuntu-latest
