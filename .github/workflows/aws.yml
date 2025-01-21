@@ -42,3 +42,5 @@ jobs:
       run: |
         cd  ${{ github.workspace }}
         terraform apply -auto-approve
+        terraform output instance_public_ip
+
