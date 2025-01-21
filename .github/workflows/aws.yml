@@ -42,5 +42,5 @@ jobs:
       run: |
         cd  ${{ github.workspace }}
         terraform apply -var-file="dev.tfvars" -auto-approve 
-        terraform output instance_public_ip
+        # terraform output instance_public_ip
 
